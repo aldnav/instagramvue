@@ -1,9 +1,10 @@
 <template>
 	<div class="card">
 		<div class="card-header">
-			<div class="avatar" v-bind:style="{'background-image': 'url(' + photo.user.profile_image.small + ')'}"></div>
-			<!-- <pre>{{ JSON.stringify(photo) }}</pre> -->
-			<div class="name">{{ photo.user.name }}</div>
+			<router-link :to="{ name: 'username', params: {username: photo.user.username } }" tag="div">
+				<div class="avatar" v-bind:style="{'background-image': 'url(' + photo.user.profile_image.small + ')'}"></div>
+				<div class="name">{{ photo.user.name }}</div>
+			</router-link>
 		</div>
 		<div class="card-body" v-bind:style="{'background-image': 'url(' + photo.urls.regular + ')'}"></div>
 		<div class="card-footer">
@@ -44,7 +45,7 @@ export default {
 	display: inline-block;	
 }
 
-.card-header > div {
+.card-header > div > div {
 	float: left;
 }
 

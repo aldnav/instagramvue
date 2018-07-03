@@ -20,6 +20,9 @@ module.exports = {
   plugins: [
     { src: '~/plugins/moment', srr: false },
   ],
+  env: {
+    USPLASH_ACCESS_KEY: process.env.USPLASH_ACCESS_KEY,
+  },
   /*
   ** Build configuration
   */

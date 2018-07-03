@@ -1,5 +1,12 @@
 <template>
-  <div>
+  <div class="container">
+    <nav>
+      <div class="nav-bound">
+        <router-link :to="{ name: 'index'}">
+          <h4>instasplash</h4>
+        </router-link>
+      </div>
+    </nav>
     <nuxt/>
   </div>
 </template>
@@ -48,5 +55,14 @@ html {
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
+}
+
+nav {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+.nav-bound {
+  width: 960px;
 }
 </style>

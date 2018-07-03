@@ -1,19 +1,17 @@
 <template>
-  <div class="feed-wrapper">
-    <Feed></Feed>
-  </div>
+  <ProfileFeed></ProfileFeed>
 </template>
 
 <script>
-import Feed from '~/components/Feed.vue'
+import ProfileFeed from '~/components/ProfileFeed.vue'
 
 export default {
   components: {
-    Feed
+    ProfileFeed
   },
 
-  async fetch({store}) {
-    await store.dispatch('LOAD_ITEMS');
+  async fetch({store, params}) {
+    await store.dispatch('LOAD_PROFILE', params.username);
   }
 }
 </script>
@@ -34,17 +32,10 @@ html, body, .container {
 }
 
 nav {
-  height: 50px;
+  height: 100px;
   width: 100%;
   border-bottom: 1px solid #e5e5e5;
   background-color: white;
-}
-
-.feed-wrapper {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 </style>
