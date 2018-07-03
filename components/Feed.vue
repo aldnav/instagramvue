@@ -11,13 +11,42 @@ import Card from '~/components/Card.vue';
 import { mapState } from 'vuex';
 
 export default {
+	data: () => ({
+		page: 1,
+		busy: false
+	}),
+
   components: {
     Card
   },
 
   computed: mapState([
   	'photos'
-  ])
+  ]),
+
+  methods: {
+  	loadMore: function() {
+  		if (this.busy) {
+  			return;
+  		}
+  		this.busy = true;
+  		this.page++;
+  		console.log(this.page);
+  		this.busy = false;
+  	}
+  },
+
+  mounted: function() {
+  	this.$on('reachedBottom', function() {
+  		this.loadMore();
+  	});
+
+  	window.onscroll = function() {
+  	    if ((window.innerHeight + Math.ceil(window.pageYOffset)) >= document.body.offsetHeight) {
+  	    this.$emit('reachedBottom');
+  	    }
+  	}.bind(this);
+  }
 }
 </script>
 

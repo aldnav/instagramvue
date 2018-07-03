@@ -1,11 +1,7 @@
 import axios from '~/plugins/axios';
 
 export const state = () => ({
-	photos: [
-		{id: 1, user: { name: 'Elon Musk' }},
-		{id: 2, user: { name: 'Kenneth Reitz' }},
-		{id: 3, user: { name: 'Dale Carnegie' }}
-	]
+	photos: []
 });
 
 export const mutations = {
