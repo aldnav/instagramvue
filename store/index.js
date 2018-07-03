@@ -14,7 +14,7 @@ const params = {
 	client_id: process.env.USPLASH_ACCESS_KEY
 };
 export const actions = {
-	async nuxtServerInit({ commit }) {
+	async LOAD_ITEMS({ commit }) {
 		const response = await axios.get('photos', {
 			params: { ...params}
 		});

@@ -13,6 +13,10 @@ import Feed from '~/components/Feed.vue'
 export default {
   components: {
     Feed
+  },
+
+  async fetch({store}) {
+    await store.dispatch('LOAD_ITEMS');
   }
 }
 </script>
