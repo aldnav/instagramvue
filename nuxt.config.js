@@ -17,6 +17,9 @@ module.exports = {
   ** Customize the progress bar color
   */
   loading: { color: '#3B8070' },
+  plugins: [
+    { src: '~/plugins/moment', srr: false }
+  ],
   /*
   ** Build configuration
   */
@@ -24,7 +27,7 @@ module.exports = {
     /*
     ** Run ESLint on save
     */
-    vendor: ['axios']
+    vendor: ['axios', 'moment']
 
     // extend (config, { isDev, isClient }) {
     //   if (isDev && isClient) {

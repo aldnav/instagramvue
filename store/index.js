@@ -22,7 +22,6 @@ export const actions = {
 		const response = await axios.get('photos', {
 			params: { ...params}
 		});
-		console.log(response.data);
 		const photos = response.data;
 
 		commit('setPhotos', photos);

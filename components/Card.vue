@@ -7,16 +7,24 @@
 		</div>
 		<div class="card-body" v-bind:style="{'background-image': 'url(' + photo.urls.regular + ')'}"></div>
 		<div class="card-footer">
-			<div class="actions"></div>
-			<div class="actions actions-right"></div>
+			<div class="actions-container">
+				<div class="actions actions--like"></div>
+				<div class="actions actions-right actions--bookmark"></div>
+			</div>
+			<div class="extra">
+				<div class="likes" v-if="photo.likes"><strong>{{ photo.likes }} likes</strong></div>
+				<div class="timeinfo">{{ moment(photo.created_at).fromNow() }}</div>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-	export default {
-		props: ['photo']
-	}
+import moment from '~/plugins/moment';
+
+export default {
+	props: ['photo']
+}
 </script>
 
 <style>
@@ -25,12 +33,14 @@
 	padding: 0;
 	margin-bottom: 60px;
 	border: 1px solid #e5e5e5;
+	border-radius: 4px;
+	background-color: white;
 }
 
 .card-header {
 	height: 60px;
 	width: 100%;
-	padding: 10px;
+	padding: 16px;
 	display: inline-block;	
 }
 
@@ -57,20 +67,30 @@
 }
 
 .card-footer {
-	border: 0.5px solid gray;
-	width: 100%;
 	min-height: 40px;
+	padding: 16px;
+}
+
+.card-footer .actions-container {
+	width: 100%;
 	display: inline-block;
 }
 
 .card-footer .actions {
-	border: 0.25px solid gray;
 	width: 40px;
 	height: 40px;
 	float: left;
+	background-size: cover;
 }
 
 .card-footer .actions.actions-right {
 	float: right;
+}
+
+.actions--like {
+	background-image: url('~/assets/heart-outline.svg');
+}
+.actions--bookmark {
+	background-image: url('~/assets/bookmark-outline.svg');
 }
 </style>

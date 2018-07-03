@@ -29,12 +29,14 @@ html, body, .container {
   margin: 0 auto;
   padding: 0;
   min-height: 100vh;
+  background-color: #fafafa;
 }
 
 nav {
   height: 50px;
   width: 100%;
   border-bottom: 1px solid #e5e5e5;
+  background-color: white;
 }
 
 .feed-wrapper {
