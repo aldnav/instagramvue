@@ -2,6 +2,8 @@
 
 > Practice VueJS by mocking Instagram
 
+![alt preview](preview.png)
+
 ## Build Setup
 
 ``` bash
