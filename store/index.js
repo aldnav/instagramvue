@@ -8,7 +8,7 @@ export const state = () => ({
 
 export const mutations = {
 	setPhotos(state, photos) {
-		state.photos = photos;
+		state.photos = state.photos.concat(photos);
 	},
 
 	setProfilePhotos(state, photos) {
@@ -25,9 +25,12 @@ const params = {
 };
 
 export const actions = {
-	async LOAD_ITEMS({ commit }) {
+	async LOAD_ITEMS({ commit }, page) {
+		if (!page) {
+			page = 1;
+		}
 		const response = await axios.get('photos', {
-			params: { ...params}
+			params: { ...params, page: page}
 		});
 		const photos = response.data;
 
