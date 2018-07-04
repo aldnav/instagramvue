@@ -31,7 +31,6 @@ export default {
   		}
   		this.busy = true;
   		this.page++;
-  		console.log(this.page);
       this.$store.dispatch('LOAD_ITEMS', this.page);
   		this.busy = false;
   	}

@@ -10,7 +10,7 @@
 						<span>{{ profile.total_collections }} Collections</span>&emsp;
 						<span>{{ profile.location }}</span>
 						<p>{{ profile.bio }}</p>
-						<a v-bind:href="profile.links.self">{{ profile.links.self }}</a>
+						<a v-bind:href="profile.links.html" target="_blank">{{ profile.links.html }}</a>
 					</div>
 				</div>
 			</div>
@@ -18,7 +18,9 @@
 		<div class="photo-grid-container">
 			<div class="photo-grid">
 				<div v-for="photo in profilePhotos" v-bind:key="photo.id" class="photo">
-					<div class="photo-prev" v-bind:style="{'background-image': 'url(' + photo.urls.regular + ')'}"></div>
+					<a v-bind:href="photo.links.html" target="_blank">
+						<div class="photo-prev" v-bind:style="{'background-image': 'url(' + photo.urls.regular + ')'}"></div>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -32,7 +34,40 @@ export default {
 	computed: mapState([
 		'profilePhotos',
 		'profile'
-	])
+	]),
+
+	data: () => ({
+		page: 1,
+		busy: false,
+		noInc: false
+	}),
+
+	methods: {
+		loadMore: async function() {
+			if (this.busy) {
+				return;
+			}
+			this.busy = true;
+			if (!this.noInc)
+				this.page++;
+	    const result = await this.$store.dispatch('LOAD_PHOTOS', {username: this.profile.username, page: this.page});
+			this.busy = false;
+			if (this.result == 0)
+				this.noInc = true;
+		}
+	},
+
+	created: function() {
+		this.$on('reachedBottom', function() {
+			this.loadMore();
+		});
+
+		window.onscroll = function() {
+		    if ((window.innerHeight + Math.ceil(window.pageYOffset)) >= document.body.offsetHeight) {
+		    this.$emit('reachedBottom');
+		    }
+		}.bind(this);
+	}
 }
 	
 </script>

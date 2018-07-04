@@ -12,7 +12,7 @@ export const mutations = {
 	},
 
 	setProfilePhotos(state, photos) {
-		state.profilePhotos = photos;
+		state.profilePhotos = state.profilePhotos.concat(photos);
 	},
 
 	setProfileInfo(state, info) {
@@ -29,6 +29,7 @@ export const actions = {
 		if (!page) {
 			page = 1;
 		}
+		console.log(page);
 		const response = await axios.get('photos', {
 			params: { ...params, page: page}
 		});
@@ -38,7 +39,6 @@ export const actions = {
 	},
 
 	async LOAD_PROFILE({ commit }, username) {
-		console.log('profile', username);
 		let response = await axios.get(`users/${username}/photos`, {
 			params: { ...params}
 		});
@@ -49,5 +49,17 @@ export const actions = {
 			params: { ...params}
 		});
 		commit('setProfileInfo', response.data);
+	},
+
+	async LOAD_PHOTOS({ commit }, {username, page}) {
+		if (!page) {
+			page = 1;
+		}
+		let response = await axios.get(`users/${username}/photos`, {
+			params: { ...params, page: page}
+		});
+		const photos = response.data;
+		commit('setProfilePhotos', photos);
+		return photos.length;
 	}
 }
